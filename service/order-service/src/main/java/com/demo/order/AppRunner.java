@@ -1,4 +1,4 @@
-package com.example.user;
+package com.demo.order;
 
 
 import org.springframework.boot.SpringApplication;
