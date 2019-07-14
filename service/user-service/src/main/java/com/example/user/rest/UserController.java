@@ -1,13 +1,19 @@
 package com.example.user.rest;
 
+import com.example.user.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/testBoot")
 public class UserController {
-    @RequestMapping(method = RequestMethod.GET, value = "/test")
-    public String test() {
-        return "测试111";
+    @Autowired
+    private UserService userService;
+
+    @RequestMapping("getUser/{id}")
+    public String GetUser(@PathVariable int id) {
+        return userService.Sel(id).toString();
     }
 }
