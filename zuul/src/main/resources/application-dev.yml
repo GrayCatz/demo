@@ -5,21 +5,20 @@ eureka:
   instance:
       ip-address: true
   client:
-    registerWithEureka: false
-    fetchRegistry: false
+    registerWithEureka: true
+    fetchRegistry: true
     serviceUrl:
         defaultZone: http://root:root@localhost:8800/eureka/
 
 spring:
   application:
     name: zuul-service
-
-
 zuul:
   routes:
     user:
       path: /user/**
-      url : http://localhost:8802/
+      service-id: user-service
+#      url : http://localhost:8802/
       stripPrefix: true
 
 logging.level.org.springframework.boot.autoconfigure: ERROR
