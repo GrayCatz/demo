@@ -18,4 +18,3 @@ eureka:
     fetchRegistry: true
     serviceUrl:
         defaultZone: http://root:root@localhost:8800/eureka/
-include: application-dao.yml
