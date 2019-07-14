@@ -1,0 +1,21 @@
+spring:
+  profiles:
+    active: dev
+debug: true
+#showSql
+logging:
+  config: classpath:log4j2.xml
+  level:
+    com:
+      example:
+        mapper : debug
+
+logging.level.org.springframework.boot.autoconfigure: ERROR
+
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+        defaultZone: http://root:root@localhost:8800/eureka/
+include: application-dao.yml
