@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="INFO">
-
     <Properties>
         <!-- 配置日志文件输出目录 -->
-        <Property name="LOG_HOME">/var/demo-logs</Property>
+        <Property name="APP_NAME" value="${sys:spring.application.name}"/>
+        <Property name="LOG_HOME" value="/var/demo-logs/${APP_NAME}"/>
+        <!-- 日志级别 -->
     </Properties>
 
     <Appenders>
@@ -23,16 +24,16 @@
                         hostName : 本地机器名
                         hostAddress : 本地ip地址
                      -->
-        <RollingRandomAccessFile name="RollingFile" fileName="${LOG_HOME}/app.log"
-                                 filePattern="${LOG_HOME}/$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log">
+        <RollingRandomAccessFile name="RollingFile" fileName="${LOG_HOME}/${APP_NAME}.log"
+                                 filePattern="${LOG_HOME}/$${date:yyyy-MM}/${APP_NAME}-%d{yyyy-MM-dd}-%i.log">
             <PatternLayout>
                 <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%-level] [%C:%M:%line] - %msg %n</Pattern>
             </PatternLayout>
             <Policies>
                 <TimeBasedTriggeringPolicy/>
-                <SizeBasedTriggeringPolicy size="102400KB"/>
+                <SizeBasedTriggeringPolicy size="1M"/>
             </Policies>
-            <DefaultRolloverStrategy fileIndex="max" max="2"/>
+            <!--<DefaultRolloverStrategy fileIndex="max" max="2"/>-->
         </RollingRandomAccessFile>
     </Appenders>
     <Loggers>
