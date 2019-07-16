@@ -1,18 +1,44 @@
 debug: true
 server:
   port: 8801
-eureka:
-  instance:
-      ip-address: true
-  client:
-    registerWithEureka: true
-    fetchRegistry: true
-    serviceUrl:
-        defaultZone: http://root:root@localhost:8800/eureka/
 
 spring:
   application:
-    name: zuul-service
+    name: ${spring.application.name}
+  datasource:
+          type: com.alibaba.druid.pool.DruidDataSource
+          url: jdbc:mysql://localhost:3306/demo?autoReconnect=false&useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+          username: root
+          password:
+          driver-class-name: com.mysql.cj.jdbc.Driver
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.example.user.entity
+  table:
+      auto: update
+  model:
+      pack: com.example.user.entity
+  database:
+      type: mysql
+  #通用mapper配置
+#mapper:
+#  #公用接口类路径
+#    mappers: com.example.user.IBaseDao
+#    identity: MYSQL
+
+#create，系统启动后，会将所有表删除，然后根据路径包中的实体类进行重新建表（会破坏原有数据）
+#none，不做任何处理
+#系统启动是会自动判断哪些表需要新建，哪些字段需要修改（不会破坏原有数据）
+
+
+#spring:
+#  application:
+#    name: zuul-service
+#  security:
+#      user:
+#        name: root
+#        password: root
 zuul:
   routes:
     user:
@@ -20,5 +46,3 @@ zuul:
       service-id: user-service
 #      url : http://localhost:8802/
       stripPrefix: true
-
-logging.level.org.springframework.boot.autoconfigure: ERROR

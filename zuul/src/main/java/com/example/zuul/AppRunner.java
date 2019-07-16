@@ -11,6 +11,9 @@ import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 @EnableZuulProxy
 public class AppRunner {
     public static void main(String[] args) {
+
+        System.setProperty("spring.profiles.active", "dev");// 指定开发环境配置
+        System.setProperty("spring.application.name", "zuul-service");// 应用日志名称
         SpringApplication.run(AppRunner.class, args);
     }
 }
