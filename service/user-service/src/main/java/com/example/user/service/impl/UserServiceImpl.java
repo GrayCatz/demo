@@ -14,4 +14,13 @@ public class UserServiceImpl implements UserService {
     public User Sel(int id) {
         return userMapper.Sel(id);
     }
+
+    public User create() {
+        User user = new User();
+        user.setUserName("yezhijian");
+        user.setPassWord("y1103038194");
+        user.setRealName("叶志建");
+        int insert = userMapper.insert(user);
+        return user;
+    }
 }

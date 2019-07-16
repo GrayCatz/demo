@@ -1,5 +1,6 @@
 package com.example.user.rest;
 
+import com.example.user.entity.User;
 import com.example.user.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +15,12 @@ public class UserController {
     private Logger logger = LoggerFactory.getLogger(UserController.class);
     @Autowired
     private UserService userService;
+
+    @RequestMapping("create")
+    public User create() {
+        logger.debug("create:");
+        return userService.create();
+    }
 
     @RequestMapping("getUser/{id}")
     public String GetUser(@PathVariable int id) {
