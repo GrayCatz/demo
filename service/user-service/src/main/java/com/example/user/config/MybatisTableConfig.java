@@ -1,6 +1,7 @@
 package com.example.user.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import org.apache.commons.lang.ArrayUtils;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.PropertiesFactoryBean;
@@ -12,6 +13,9 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 @Configuration
 @ComponentScan(basePackages = {"com.gitee.sunchenbin.mybatis.actable.manager.*"})
@@ -68,7 +72,10 @@ public class MybatisTableConfig {
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(dataSource());
         PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-        sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath*:com/gitee/sunchenbin/mybatis/actable/mapping/*/*.xml"));
+        Resource[] resources = resolver.getResources("classpath*:com/gitee/sunchenbin/mybatis/actable/mapping/*/*.xml");
+        Resource[] resources2 = resolver.getResources("classpath:mapper/*.xml");
+        Resource[] objects = (Resource[]) ArrayUtils.addAll(resources, resources2);
+        sqlSessionFactoryBean.setMapperLocations(objects);
 //实体类的位置
         sqlSessionFactoryBean.setTypeAliasesPackage("com.example.user.entity.*");
         return sqlSessionFactoryBean;

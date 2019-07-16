@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.user.mapper.UserRoleMapper">
+    <resultMap type="com.example.user.entity.UserRole" id="BaseColumn">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="role_id" property="roleId"/>
+    </resultMap>
+
+    <sql id="base">
+    ur.id ,
+    ur.user_id,
+    ur.role_id
+    </sql>
+
+    <sql id="userColumn">
+    u.id,
+    u.username,
+    u.password
+    </sql>
+
+    <sql id="roleColumn">
+    r.id,
+    r.name
+    </sql>
+
+    <select id="Sel" resultType="com.example.user.entity.UserRole">
+        select * from user_role where id = #{id}
+    </select>
+
+    <select id="selectUserWithRoles" resultMap="BaseColumn" parameterType="java.lang.Integer">
+        select
+        <include refid="base"/>
+        from user_role ur
+        LEFT JOIN `user` u on u.id=ur.user_id
+        LEFT join role r on
+        r.id=ur.role_id
+        where
+        user_id=#{user_id}
+    </select>
+</mapper>

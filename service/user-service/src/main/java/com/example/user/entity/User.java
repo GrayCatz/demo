@@ -8,11 +8,11 @@ import lombok.Data;
 @Data
 @Table(name = "user")
 public class User extends BaseEntity {
-    @Column(name = "user_name", type = MySqlTypeConstant.VARCHAR, length = 256)
-    private String userName;
+    @Column(name = "username", type = MySqlTypeConstant.VARCHAR, length = 256)
+    private String username;
     @Column(name = "real_name", type = MySqlTypeConstant.VARCHAR, length = 256)
     private String realName;
-    @Column(name = "pass_word", type = MySqlTypeConstant.VARCHAR, length = 256)
-    private String passWord;
+    @Column(name = "password", type = MySqlTypeConstant.VARCHAR, length = 256)
+    private String password;
 
 }
